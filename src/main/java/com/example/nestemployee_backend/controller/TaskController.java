@@ -3,12 +3,10 @@ package com.example.nestemployee_backend.controller;
 import com.example.nestemployee_backend.dao.TaskDao;
 import com.example.nestemployee_backend.model.Task;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -27,6 +25,13 @@ public class TaskController {
         dao.save(t);
         map.put("status","success");
         return map;
+    }
+
+    @CrossOrigin(origins = "*")
+    @GetMapping(path = "/viewall")
+    public List<Map<String,String>> viewall()
+    {
+        return (List<Map<String, String>>) dao.viewall();
     }
 
 

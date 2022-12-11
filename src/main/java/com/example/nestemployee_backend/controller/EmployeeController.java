@@ -42,7 +42,7 @@ public class EmployeeController {
         }
         else
         {
-            int id=result.get(0).getId();
+            String id=result.get(0).getEmpcode();
             st.put("userid",String.valueOf(id));
             st.put("status","success");
         }

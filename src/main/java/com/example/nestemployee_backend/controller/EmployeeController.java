@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -27,5 +28,28 @@ public class EmployeeController {
         HashMap<String,String> map=new HashMap<>();
         map.put("status","success");
         return map;
+    }
+
+    @CrossOrigin(origins = "*")
+    @PostMapping(path = "/login",consumes = "application/json",produces = "application/json")
+    public HashMap<String,String> login(@RequestBody Employee e)
+    {
+        String username=String.valueOf(e.getUsername());
+        String password=String.valueOf(e.getPassword());
+        // return (List<Customers>) dao1.login(username,password);
+        List<Employee> result=(List<Employee>) dao.login(username,password);
+        HashMap<String,String> st=new HashMap<>();
+        if (result.size()==0)
+        {
+            st.put("status","failed");
+        }
+        else
+        {
+            int id=result.get(0).getId();
+            st.put("userid",String.valueOf(id));
+            st.put("status","success");
+        }
+        return st;
+
     }
 }

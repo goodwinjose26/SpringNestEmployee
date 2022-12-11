@@ -9,6 +9,6 @@ import java.util.Map;
 
 public interface TaskDao extends CrudRepository<Task,Integer> {
 
-    @Query(value = "SELECT e.`address`, e.`email`, e.`empcode`, e.`name`, e.`phno`,t.`task`,t.`status` FROM `employees` e JOIN task t ON e.empcode=t.empcode")
+    @Query(value = "SELECT e.`address`, e.`email`, e.`empcode`, e.`name`, e.`phno`,t.`task`,t.`status` FROM `employees` e JOIN task t ON e.empcode=t.empcode",nativeQuery = true)
     List<Map<String,String>> viewall();
 }

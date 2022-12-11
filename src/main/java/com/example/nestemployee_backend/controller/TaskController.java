@@ -34,5 +34,13 @@ public class TaskController {
         return (List<Map<String, String>>) dao.viewall();
     }
 
+    @CrossOrigin(origins = "*")
+    @PostMapping(path = "/mytask",consumes = "application/json",produces = "application/json")
+    public List<Task> mytask(@RequestBody Task t)
+    {
+
+        return (List<Task>) dao.mytask(t.getEmpcode());
+    }
+
 
 }

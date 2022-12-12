@@ -1,6 +1,8 @@
 package com.example.nestemployee_backend.dao;
 
 import com.example.nestemployee_backend.model.Task;
+import jakarta.transaction.Transactional;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
@@ -16,4 +18,10 @@ public interface TaskDao extends CrudRepository<Task,Integer> {
 
     @Query(value = "SELECT `id`, `empcode`, `status`, `task` FROM `task` WHERE `empcode`=:empcode",nativeQuery = true)
     List<Task> mytask(@Param("empcode") String empcode);
+
+
+    @Modifying
+    @Transactional
+    @Query(value = "UPDATE `task` SET `status`=:status WHERE `empcode`= :empcode",nativeQuery = true)
+    void updateStatus(@Param("empcode") String empcode, @Param("status") String status);
 }
